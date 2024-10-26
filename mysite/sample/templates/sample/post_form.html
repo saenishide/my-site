@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Post Form</title>
+</head>
+<body>
+    <h4>Post の編集</h4>
+    {% if post_id %}
+        <h4>既存データの編集</h4>
+        <form method="post" action="{% url 'sample:edit_post' post_id %}">
+    {% else %}
+        <h4>新規作成</h4>
+        <form method="post" action="{% url 'sample:create_post' %}">
+    {% endif %}
+        {% csrf_token %}
+        {{ form.as_p }} <!-- as_pは各フィールドをPタグで生成、他にもいろいろある -->
+        <button type="submit">送信</button>
+    </form>
+    <a href="{% url 'sample:read_post' %}">戻る</a>
+</body>
+</html>
