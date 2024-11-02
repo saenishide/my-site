@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>編集確認</title>
+</head>
+<body>
+    <h1>編集確認</h1>
+    <p>タイトル: {{ form.title }}</p>
+    <p>今日の言葉: {{ form.todayWord }}</p>
+    <p>画像URL: <img src="{{ form.imgUrl }}" alt="Image"></p>
+    <form method="post" action="{% url 'my_area:complete_edit'%}">
+        {% csrf_token %}
+        {{ form.as_hidden }}
+        <button type="submit">編集を確定する</button>
+    </form>
+</body>
+</html>

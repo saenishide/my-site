@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>削除確認</title>
+</head>
+<body>
+    <h1>削除確認</h1>
+    <p>本当にこの投稿を削除しますか？</p>
+    <p>タイトル: {{ form.title }}</p>
+    <p>今日の言葉: {{ form.todayWord }}</p>
+    <p>画像URL: <img src="{{ form.imgUrl }}" alt="Image"></p>
+    <form method="post" action="{% url 'my_area:complete_delete' form.id %}">
+        {% csrf_token %}
+        {{ form.as_hidden }}
+        <button type="submit">削除する</button>
+        <a href="{% url 'my_area:edit' %}">キャンセル</a>
+    </form>
+</body>
+</html>

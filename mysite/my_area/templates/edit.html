@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>投稿編集</title>
+</head>
+<body>
+    <h1>投稿編集</h1>
+    <form method="post" action="{% url 'my_area:confirm_edit' post.id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            <label for="id_title">タイトル:</label>
+            {{ form.title }}
+        </div>
+        <div>
+            <label for="id_todayWord">今日の言葉:</label>
+            {{ form.todayWord }}
+        </div>
+        <div>
+            <label for="id_imgUrl">画像URL:</label>
+            {{ form.imgUrl }}
+        </div>
+        <button type="submit">変更を保存</button>
+    </form>
+    <a href="{% url 'my_area:detail' post_id=post.id %}">投稿詳細に戻る</a>
+</body>
+</html>

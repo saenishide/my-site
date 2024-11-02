@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>新規作成確認</title>
+</head>
+<body>
+    <h1>新規作成確認</h1>
+    <p>タイトル: {{ post.title }}</p>
+    <p>今日の言葉: {{ post.todayWord }}</p>
+    <p>画像URL: <img src="{{ post.imgUrl }}" alt="Image"></p>
+    <form method="post" action="{% url 'my_area:complete_create' %}">
+        {% csrf_token %}
+        <input type="hidden" name="title" value="{{ post.title }}">
+        <input type="hidden" name="todayWord" value="{{ post.todayWord }}">
+        <input type="hidden" name="imgUrl" value="{{ post.imgUrl }}">
+        <input type="hidden" name="id" value="{{ post.id }}">
+        <button type="submit">作成を確定する</button>
+    </form>
+</body>
+</html>
