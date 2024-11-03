@@ -5,19 +5,19 @@
 </head>
 <body>
     <h1>投稿編集</h1>
-    <form method="post" action="{% url 'my_area:confirm_edit' post.id %}" enctype="multipart/form-data">
+    <form method="post" action="{% url 'my_area:confirm_edit' post_id=post.id %}" enctype="multipart/form-data">
         {% csrf_token %}
         <div>
             <label for="id_title">タイトル:</label>
-            {{ form.title }}
+            <input type="text" name="title" id="id_title" value="{{ post.title }}">
         </div>
         <div>
             <label for="id_todayWord">今日の言葉:</label>
-            {{ form.todayWord }}
+            <input type="text" name="todayWord" id="id_todayWord" value="{{ post.todayWord }}">
         </div>
         <div>
             <label for="id_imgUrl">画像URL:</label>
-            {{ form.imgUrl }}
+            <input type="text" name="imgUrl" id="id_imgUrl" value="{{ post.imgUrl }}">
         </div>
         <button type="submit">変更を保存</button>
     </form>

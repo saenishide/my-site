@@ -8,5 +8,5 @@ class PostService:
     def getAll(self):
         return Post.objects.filter(deleteFlag=False).order_by('id')
 
-    def getById(self, post_id):
+    def getById(post_id):
         return Post.objects.filter(id=post_id, deleteFlag=False).first()

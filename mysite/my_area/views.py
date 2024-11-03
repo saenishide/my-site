@@ -19,30 +19,40 @@ def display_create(request):
 
 # 詳細ページを表示
 def display_detail(request, post_id):
-    post = PostService.getById(post_id)
-    form = PostForm(instance=post)
-    return render(request, 'detail.html', {'form': form, 'post_id': post_id})
+    post = PostService.getById(post_id=post_id)
+    return render(request, 'detail.html', {'post': post})
 
 # 編集ページを表示
 def display_edit(request, post_id):
     post = PostService.getById(post_id)
-    form = PostForm(instance=post)
-    return render(request, 'edit.html', {'form': form, 'post_id': post_id})
+    return render(request, 'edit.html', {'post': post})
 
 """
 確認表示
 """
 # 削除確認ページを表示
 def confirm_delete(request, post_id):
-    post = PostService.getById(post_id)
+    post = PostService.getById(post_id=post_id)
     form = PostForm(request.POST, instance=post)
-    return render(request, 'confirm_delete.html', {'form': form})
+    return render(request, 'confirm_delete.html'
+                  , {'post': {
+                      'id': post_id,
+                      'title': post.title, 
+                      'todayWord': post.todayWord,
+                      'imgUrl': post.imgUrl,
+                    }})
 
 # 編集確認ページを表示
 def confirm_edit(request, post_id):
     post = PostService.getById(post_id)
     form = PostForm(request.POST, instance=post)
-    return render(request, 'confirm_edit.html', {'form': form})
+    return render(request, 'confirm_edit.html'
+                  , {'post': {
+                      'id': post_id,
+                      'title': form.data['title'], 
+                      'todayWord': form.data['todayWord'],
+                      'imgUrl': form.data['imgUrl'],
+                    }})
 
 # 新規作成確認ページを表示
 def confirm_create(request):
