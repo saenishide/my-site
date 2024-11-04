@@ -33,7 +33,6 @@ def display_edit(request, post_id):
 # 削除確認ページを表示
 def confirm_delete(request, post_id):
     post = PostService.getById(post_id=post_id)
-    form = PostForm(request.POST, instance=post)
     return render(request, 'confirm_delete.html'
                   , {'post': {
                       'id': post_id,
@@ -45,13 +44,18 @@ def confirm_delete(request, post_id):
 # 編集確認ページを表示
 def confirm_edit(request, post_id):
     post = PostService.getById(post_id)
+    image = request.FILES.get('imgUrl')
+    # ファイルをアップロード
+    if image is not None:
+        post.imgUrl = image.name
+        PostService.uploadImage(image)
     form = PostForm(request.POST, instance=post)
     return render(request, 'confirm_edit.html'
                   , {'post': {
                       'id': post_id,
                       'title': form.data['title'], 
                       'todayWord': form.data['todayWord'],
-                      'imgUrl': form.data['imgUrl'],
+                      'imgUrl': post.imgUrl,
                     }})
 
 # 新規作成確認ページを表示

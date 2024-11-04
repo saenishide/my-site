@@ -1,9 +1,9 @@
+{% extends 'common.html' %}
 <!DOCTYPE html>
-<html>
-<head>
-    <title>削除確認</title>
-</head>
-<body>
+{% block title %}
+<title>削除確認</title>
+{% endblock %}
+{% block content %}
     <h1>削除確認</h1>
     <p>本当にこの投稿を削除しますか？</p>
     <p>タイトル: {{ form.title }}</p>
@@ -18,5 +18,4 @@
         <button type="submit">削除する</button>
         <a href="{% url 'my_area:detail' post_id=post.id %}">キャンセル</a>
     </form>
-</body>
-</html>
+{% endblock %}

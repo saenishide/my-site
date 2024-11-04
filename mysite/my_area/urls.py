@@ -1,5 +1,7 @@
 from django.urls import path
 from my_area import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name = 'my_area'
 urlpatterns = [
@@ -17,4 +19,4 @@ urlpatterns = [
 
     path('confirm/delete/<int:post_id>/', views.confirm_delete, name='confirm_delete'),
     path('complete/delete/<int:post_id>/', views.delete_post, name='complete_delete'),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

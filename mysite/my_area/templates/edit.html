@@ -1,9 +1,9 @@
+{% extends 'common.html' %}
 <!DOCTYPE html>
-<html>
-<head>
-    <title>投稿編集</title>
-</head>
-<body>
+{% block title %}
+<title>投稿編集</title>
+{% endblock %}
+{% block content %}
     <h1>投稿編集</h1>
     <form method="post" action="{% url 'my_area:confirm_edit' post_id=post.id %}" enctype="multipart/form-data">
         {% csrf_token %}
@@ -16,11 +16,10 @@
             <input type="text" name="todayWord" id="id_todayWord" value="{{ post.todayWord }}">
         </div>
         <div>
-            <label for="id_imgUrl">画像URL:</label>
-            <input type="text" name="imgUrl" id="id_imgUrl" value="{{ post.imgUrl }}">
+            <label for="id_imgUrl">画像:</label>
+            <input type="file" name="imgUrl" id="id_imgUrl" va>
         </div>
         <button type="submit">変更を保存</button>
     </form>
     <a href="{% url 'my_area:detail' post_id=post.id %}">投稿詳細に戻る</a>
-</body>
-</html>
+{% endblock %}

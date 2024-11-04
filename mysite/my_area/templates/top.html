@@ -1,29 +1,28 @@
+{% extends 'common.html' %}
 {% load static %}
 <!DOCTYPE html>
-<html>
-<head>
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/top.css' %}">
+{% endblock %}
+{% block title %}
     <title>トップページ</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <div id="context_body">
-        <h1>ここからは私のエリアだ</h1>
-        <p>ようこそ、トップページへ！</p>
-        <div class="post_list">
-            {% for post in postList %}
-            <div class="post_cassette">
-                <div class="date_title">
-                    <span>{{ post.date|date:"Y/m/d" }}</span>
-                    <span class="post_title">タイトル「{{ post.title }}」</span>
-                </div>
-                <div class="context_detail">
-                    <span>{{ post.todayWord }}</span>
-                    <a href="{% url 'my_area:detail' post_id=post.id %}">詳細</a>
-                </div>
-            </div>
-            {% endfor %}
+{% endblock %}
+{% block content %}
+<h1>ここからは私のエリアだ</h1>
+<p>ようこそ、トップページへ！</p>
+<div class="post_list">
+    {% for post in postList %}
+    <div class="post_cassette">
+        <div class="date_title">
+            <span>{{ post.date|date:"Y/m/d" }}</span>
+            <span class="post_title">タイトル「{{ post.title }}」</span>
         </div>
-        <a href="{% url 'my_area:create' %}">新しい投稿を作成</a>
+        <div class="context_detail">
+            <span>{{ post.todayWord }}</span>
+            <a href="{% url 'my_area:detail' post_id=post.id %}">詳細</a>
+        </div>
     </div>
-</body>
-</html>
+    {% endfor %}
+</div>
+<a href="{% url 'my_area:create' %}">新しい投稿を作成</a>
+{% endblock %}

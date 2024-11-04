@@ -1,9 +1,9 @@
+{% extends 'common.html' %}
 <!DOCTYPE html>
-<html>
-<head>
-    <title>編集確認</title>
-</head>
-<body>
+{% block title %}
+<title>編集確認</title>
+{% endblock %}
+{% block content %}
     <h1>編集確認</h1>
     <p>タイトル: {{ post.title }}</p>
     <p>今日の言葉: {{ post.todayWord }}</p>
@@ -16,5 +16,4 @@
         <input type="hidden" name="id" value="{{ post.id }}">
         <button type="submit">編集を確定する</button>
     </form>
-</body>
-</html>
+{% endblock %}
