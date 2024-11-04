@@ -1,6 +1,8 @@
+import hashlib
 from my_area.models import Post
-from django.db import models
 from django.conf import settings
+import shutil
+import datetime
 
 class PostService:
 
@@ -16,7 +18,18 @@ class PostService:
     """
     操作
     """
+    def getHashName(imageName, extension):
+        targetName = (imageName + str(datetime.datetime.now())).encode('utf-8')
+        return hashlib.md5(targetName).hexdigest() + '.' + extension
+
     def uploadImage(image):
-        url = settings.STATICFILES_DIRS[0] + '/img/temp/' + image.name
-        file = models.FileField(upload_to=url)
-        return file
+        file_path = settings.STATICFILES_DIRS[0] + '/img/temp/' + image.name
+        with open(file_path, 'wb+') as destination:
+            for chunk in image.chunks():
+                destination.write(chunk)
+    
+    def moveImage(image_name):
+        temp_file_path = settings.STATICFILES_DIRS[0] + '/img/temp/' + image_name
+        file_dir = settings.STATICFILES_DIRS[0] + '/img/'
+        shutil.move(temp_file_path, file_dir)
+        

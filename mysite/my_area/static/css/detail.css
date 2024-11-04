@@ -1,0 +1,17 @@
+#detail-content {
+    width: 100%;
+}
+
+#detail-text {
+    float: left;
+    width: 70%;
+}
+
+#detail-img {
+    float: left;
+    width: 30%;
+}
+
+#detail-img > img {
+    width: 100%;
+}

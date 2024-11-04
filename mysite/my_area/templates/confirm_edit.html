@@ -1,4 +1,5 @@
 {% extends 'common.html' %}
+{% load static %}
 <!DOCTYPE html>
 {% block title %}
 <title>編集確認</title>
@@ -7,7 +8,7 @@
     <h1>編集確認</h1>
     <p>タイトル: {{ post.title }}</p>
     <p>今日の言葉: {{ post.todayWord }}</p>
-    <p>画像URL: <img src="{{ post.imgUrl }}" alt="Image"></p>
+    <p>画像URL: <img src="{% static '/img/temp/'|add:post.imgUrl %}" alt="Image"></p>
     <form method="post" action="{% url 'my_area:complete_edit' post_id=post.id %}">
         {% csrf_token %}
         <input type="hidden" name="title" value="{{ post.title }}">

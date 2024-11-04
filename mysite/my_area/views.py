@@ -47,7 +47,8 @@ def confirm_edit(request, post_id):
     image = request.FILES.get('imgUrl')
     # ファイルをアップロード
     if image is not None:
-        post.imgUrl = image.name
+        extension = image.name.split('.')[-1]
+        image.name = PostService.getHashName(image.name, extension)
         PostService.uploadImage(image)
     form = PostForm(request.POST, instance=post)
     return render(request, 'confirm_edit.html'
@@ -55,7 +56,7 @@ def confirm_edit(request, post_id):
                       'id': post_id,
                       'title': form.data['title'], 
                       'todayWord': form.data['todayWord'],
-                      'imgUrl': post.imgUrl,
+                      'imgUrl': image.name,
                     }})
 
 # 新規作成確認ページを表示
@@ -89,6 +90,7 @@ def edit_post(request, post_id):
     post = PostService.getById(post_id)
     form = PostForm(request.POST, instance=post)
     if form.is_valid():
+        PostService.moveImage(request.POST['imgUrl'])
         post = form.save(commit=False)
         post.save()
 

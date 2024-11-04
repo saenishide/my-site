@@ -1,4 +1,5 @@
 {% extends 'common.html' %}
+{% load static %}
 <!DOCTYPE html>
 {% block title %}
 <title>編集完了</title>
@@ -8,6 +9,6 @@
     <p>投稿が編集されました。</p>
     <p>タイトル: {{ post.title }}</p>
     <p>今日の言葉: {{ post.todayWord }}</p>
-    <p>画像URL: <img src="{{ post.imgUrl }}" alt="Image"></p>
+    <p>画像URL: <img src="{% static '/img/'|add:post.imgUrl %}" alt="Image"></p>
     <a href="{% url 'my_area:top' %}">投稿一覧に戻る</a>
 {% endblock %}
