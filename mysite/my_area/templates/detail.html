@@ -10,7 +10,7 @@
 {% block content %}
     <h1>タイトル: {{ post.title }}</h1>
     <div id="detail-content">
-        <div id="detail-text">{{ post.todayWord }}</div>
+        <div id="detail-text">{{ post.todayWord|linebreaksbr }}</div>
         <div id="detail-img"><img src="{% static '/img/'|add:post.imgUrl %}" alt="Image"></div>
     </div>
     <div>

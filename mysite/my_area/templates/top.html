@@ -18,7 +18,7 @@
             <span class="post_title">タイトル「{{ post.title }}」</span>
         </div>
         <div class="context_detail">
-            <span>{{ post.todayWord }}</span>
+            <span>{{ post.todayWord|linebreaksbr }}</span>
             <a href="{% url 'my_area:detail' post_id=post.id %}">詳細</a>
         </div>
     </div>

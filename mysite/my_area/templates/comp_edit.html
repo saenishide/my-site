@@ -8,7 +8,7 @@
     <h1>編集完了</h1>
     <p>投稿が編集されました。</p>
     <p>タイトル: {{ post.title }}</p>
-    <p>今日の言葉: {{ post.todayWord }}</p>
+    <p>今日の言葉: {{ post.todayWord|linebreaksbr }}</p>
     <p>画像URL: <img src="{% static '/img/'|add:post.imgUrl %}" alt="Image"></p>
     <a href="{% url 'my_area:top' %}">投稿一覧に戻る</a>
 {% endblock %}

@@ -1,5 +1,9 @@
 {% extends 'common.html' %}
+{% load static %}
 <!DOCTYPE html>
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/edit.css' %}">
+{% endblock %}
 {% block title %}
 <title>投稿編集</title>
 {% endblock %}
@@ -7,15 +11,15 @@
     <h1>投稿編集</h1>
     <form method="post" action="{% url 'my_area:confirm_edit' post_id=post.id %}" enctype="multipart/form-data">
         {% csrf_token %}
-        <div>
-            <label for="id_title">タイトル:</label>
-            <input type="text" name="title" id="id_title" value="{{ post.title }}">
+        <div id="title_area">
+            <label id="title_label" for="id_title">タイトル</label>
+            <input type="text" name="title" id="title_text" value="{{ post.title }}">
         </div>
-        <div>
-            <label for="id_todayWord">今日の言葉:</label>
-            <input type="text" name="todayWord" id="id_todayWord" value="{{ post.todayWord }}">
+        <div id="text_area">
+            <label id="text_label" for="id_title">本文</label>
+            <textarea name="todayWord" id="text_text">{{ post.todayWord }}</textarea>
         </div>
-        <div>
+        <div id="img_area">
             <label for="id_imgUrl">画像:</label>
             <input type="file" name="imgUrl" id="id_imgUrl" va>
         </div>
