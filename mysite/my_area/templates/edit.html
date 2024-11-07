@@ -15,15 +15,28 @@
             <label id="title_label" for="id_title">タイトル</label>
             <input type="text" name="title" id="title_text" value="{{ post.title }}">
         </div>
-        <div id="text_area">
-            <label id="text_label" for="id_title">本文</label>
-            <textarea name="todayWord" id="text_text">{{ post.todayWord }}</textarea>
+        <div id="detail-content">
+            <div id="text_area">
+                <label id="text_label" for="id_title">本文</label>
+                <textarea name="todayWord" id="text_text">{{ post.todayWord }}</textarea>
+            </div>
+            <div id="detail-img">
+                <label id="img_label" for="id_imgUrl">画像</label>
+                <input type="file" name="imgUrl" id="id_imgUrl">
+                <div id="image-display">
+                    {% if post.imgUrl %}
+                    <img id="content-img" src="{% static '/img/'|add:post.imgUrl %}" alt="Image">
+                    {% else %}
+                    <img id="content-img" src="{% static '/img/noimage_edit.jpg' %}" alt="Image">
+                    {% endif %}
+                </div>
+            </div>
         </div>
-        <div id="img_area">
-            <label for="id_imgUrl">画像:</label>
-            <input type="file" name="imgUrl" id="id_imgUrl" va>
+        <div>
+            <button type="submit">変更を保存</button>
         </div>
-        <button type="submit">変更を保存</button>
     </form>
-    <a href="{% url 'my_area:detail' post_id=post.id %}">投稿詳細に戻る</a>
+    <div>
+        <a href="{% url 'my_area:detail' post_id=post.id %}">投稿詳細に戻る</a>
+    </div>
 {% endblock %}
