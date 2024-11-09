@@ -19,4 +19,6 @@ urlpatterns = [
 
     path('confirm/delete/<int:post_id>/', views.confirm_delete, name='confirm_delete'),
     path('complete/delete/<int:post_id>/', views.delete_post, name='complete_delete'),
+
+    path('imgupload/', views.imgupload, name='img_upload')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

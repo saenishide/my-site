@@ -4,6 +4,9 @@
 {% block extra_css %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/edit.css' %}">
 {% endblock %}
+{% block extra_js %}
+<script src="{% static 'js/edit.js' %}"></script>
+{% endblock %}
 {% block title %}
 <title>投稿編集</title>
 {% endblock %}
@@ -22,7 +25,9 @@
             </div>
             <div id="detail-img">
                 <label id="img_label" for="id_imgUrl">画像</label>
-                <input type="file" name="imgUrl" id="id_imgUrl">
+                <input id="form-img" type="hidden" name="imgUrl" value="{{post.imgUrl}}">
+                <input id="form-img-change" type="hidden" name="imgUrlChange" value="false">
+                <input type="file" id="id_imgUrl">
                 <div id="image-display">
                     {% if post.imgUrl %}
                     <img id="content-img" src="{% static '/img/'|add:post.imgUrl %}" alt="Image">
@@ -32,8 +37,8 @@
                 </div>
             </div>
         </div>
-        <div>
-            <button type="submit">変更を保存</button>
+        <div id="save">
+            <button id="save-button" type="submit">変更を保存</button>
         </div>
     </form>
     <div>

@@ -8,12 +8,19 @@
     <h1>編集確認</h1>
     <p>タイトル: {{ post.title }}</p>
     <p>今日の言葉: {{ post.todayWord|linebreaksbr }}</p>
-    <p>画像URL: <img src="{% static '/img/temp/'|add:post.imgUrl %}" alt="Image"></p>
+    <p>画像URL: 
+        {% if post.imgUrlChange == 'true' %}
+        <img src="{% static '/img/temp/'|add:post.imgUrl %}" alt="Image">
+        {% else %}
+        <img src="{% static '/img/'|add:post.imgUrl %}" alt="Image">
+        {% endif %}
+    </p>
     <form method="post" action="{% url 'my_area:complete_edit' post_id=post.id %}">
         {% csrf_token %}
         <input type="hidden" name="title" value="{{ post.title }}">
         <input type="hidden" name="todayWord" value="{{ post.todayWord }}">
         <input type="hidden" name="imgUrl" value="{{ post.imgUrl }}">
+        <input type="hidden" name="imgUrlChange" value="{{ post.imgUrlChange }}">
         <input type="hidden" name="id" value="{{ post.id }}">
         <button type="submit">編集を確定する</button>
     </form>

@@ -2,6 +2,7 @@ import hashlib
 from my_area.models import Post
 from django.conf import settings
 import shutil
+import os
 import datetime
 
 class PostService:
@@ -32,4 +33,6 @@ class PostService:
         temp_file_path = settings.STATICFILES_DIRS[0] + '/img/temp/' + image_name
         file_dir = settings.STATICFILES_DIRS[0] + '/img/'
         shutil.move(temp_file_path, file_dir)
+        shutil.rmtree(settings.STATICFILES_DIRS[0] + '/img/temp/')
+        os.mkdir(settings.STATICFILES_DIRS[0] + '/img/temp/')
         

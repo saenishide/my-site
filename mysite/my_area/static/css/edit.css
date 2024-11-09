@@ -37,7 +37,7 @@
 
 #text_area #text_text {
     position: relative;
-    width: 90%;
+    width: 96%;
     height: 300px;
     border: 0px solid #ccc;
     border-radius: 5px;
@@ -48,7 +48,16 @@
     position: relative;
     float: left;
     width: 30%;
+    height: 300px;
     margin-top: 1.5em;
+}
+
+#detail-img:hover {
+    cursor: pointer;
+}
+
+#detail-img:hover #content-img {
+    opacity: 0.5;
 }
 
 #detail-img #img_label {
@@ -62,6 +71,28 @@
 }
 
 #image-display, #image-display > img {
-    position: absolute;
     width: 100%;
+    height: 300px;       /* 高さも設定したげる */
+    object-fit: contain; /* 画像のアスペクト比を保持したまま、指定したサイズに収まるように表示 */
+}
+
+#save {	
+    clear: left; /* float: leftをおわらせるために必要 */
+}
+
+#save #save-button {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 2em;
+    font-size: 1.2em;
+    border: 0px solid #ccc;
+    border-radius: 5px;
+    background-color: #00ffdd;
+    color: #000;
+    cursor: pointer;
+}
+
+#id_imgUrl {
+    display: none;
 }

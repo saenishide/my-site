@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from my_area.service.postService import PostService
 from my_area.form.postForm import PostForm
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 
 """
 表示
@@ -44,19 +46,14 @@ def confirm_delete(request, post_id):
 # 編集確認ページを表示
 def confirm_edit(request, post_id):
     post = PostService.getById(post_id)
-    image = request.FILES.get('imgUrl')
-    # ファイルをアップロード
-    if image is not None:
-        extension = image.name.split('.')[-1]
-        image.name = PostService.getHashName(image.name, extension)
-        PostService.uploadImage(image)
     form = PostForm(request.POST, instance=post)
     return render(request, 'confirm_edit.html'
                   , {'post': {
                       'id': post_id,
                       'title': form.data['title'], 
                       'todayWord': form.data['todayWord'],
-                      'imgUrl': image.name,
+                      'imgUrl': form.data['imgUrl'],
+                      'imgUrlChange': form.data['imgUrlChange'],
                     }})
 
 # 新規作成確認ページを表示
@@ -90,7 +87,8 @@ def edit_post(request, post_id):
     post = PostService.getById(post_id)
     form = PostForm(request.POST, instance=post)
     if form.is_valid():
-        PostService.moveImage(request.POST['imgUrl'])
+        if form.data['imgUrlChange'] == 'true':
+            PostService.moveImage(request.POST['imgUrl'])
         post = form.save(commit=False)
         post.save()
 
@@ -106,3 +104,14 @@ def delete_post(request, post_id):
         post.save()
 
     return render(request, 'comp_delete.html', {'post': post})
+
+# 画像アップロード
+@csrf_exempt
+def imgupload(request):
+    image = request.FILES.get('image')
+    # ファイルをアップロード
+    if image is not None:
+        extension = image.name.split('.')[-1]
+        image.name = PostService.getHashName(image.name, extension)
+        PostService.uploadImage(image)
+    return JsonResponse({"file_name": image.name})
