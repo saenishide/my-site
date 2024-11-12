@@ -2,26 +2,55 @@
 {% load static %}
 <!DOCTYPE html>
 {% block title %}
-<title>編集確認</title>
+    {% if mode == 'delete' %}
+    <title>削除確認</title>
+    {% elif mode == 'create' %}
+    <title>作成確認</title>
+    {% else %}
+    <title>編集確認</title>
+    {% endif %}
 {% endblock %}
 {% block content %}
+    {% if mode == 'delete' %}
+    <h1>削除確認</h1>
+    {% elif mode == 'create' %}
+    <h1>作成確認</h1>
+    {% else %}
     <h1>編集確認</h1>
+    {% endif %}
     <p>タイトル: {{ post.title }}</p>
     <p>今日の言葉: {{ post.todayWord|linebreaksbr }}</p>
     <p>画像URL: 
         {% if post.imgUrlChange == 'true' %}
         <img src="{% static '/img/temp/'|add:post.imgUrl %}" alt="Image">
-        {% else %}
+        {% elif post.imgUrl %}
         <img src="{% static '/img/'|add:post.imgUrl %}" alt="Image">
+        {% else %}
+        <img src="{% static '/img/noimage_edit.jpg' %}" alt="Image">
         {% endif %}
+        
     </p>
+    {% if mode == 'delete' %}
+    <form method="post" action="{% url 'my_area:complete_delete' post_id=post.id %}">
+    {% elif mode == 'create' %}
+    <form method="post" action="{% url 'my_area:complete_create' %}">
+    {% else %}
     <form method="post" action="{% url 'my_area:complete_edit' post_id=post.id %}">
+    {% endif %}
         {% csrf_token %}
         <input type="hidden" name="title" value="{{ post.title }}">
         <input type="hidden" name="todayWord" value="{{ post.todayWord }}">
+        {% if post.imgUrl %}
         <input type="hidden" name="imgUrl" value="{{ post.imgUrl }}">
+        {% endif %}
         <input type="hidden" name="imgUrlChange" value="{{ post.imgUrlChange }}">
         <input type="hidden" name="id" value="{{ post.id }}">
+        {% if mode == 'delete' %}
+        <button type="submit">削除する</button>
+        {% elif mode == 'create' %}
+        <button type="submit">作成を確定する</button>
+        {% else %}
         <button type="submit">編集を確定する</button>
+        {% endif %}
     </form>
 {% endblock %}

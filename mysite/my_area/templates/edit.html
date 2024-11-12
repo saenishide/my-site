@@ -12,7 +12,11 @@
 {% endblock %}
 {% block content %}
     <h1>投稿編集</h1>
+    {% if mode == 'edit' %}
     <form method="post" action="{% url 'my_area:confirm_edit' post_id=post.id %}" enctype="multipart/form-data">
+    {% else %}
+    <form method="post" action="{% url 'my_area:confirm_create' %}" enctype="multipart/form-data">
+    {% endif %}
         {% csrf_token %}
         <div id="title_area">
             <label id="title_label" for="id_title">タイトル</label>
@@ -38,10 +42,18 @@
             </div>
         </div>
         <div id="save">
+            {% if mode == 'edit' %}
             <button id="save-button" type="submit">変更を保存</button>
+            {% else %}
+            <button id="save-button" type="submit">投稿を作成</button>
+            {% endif %}
         </div>
     </form>
     <div>
+        {% if mode == 'edit' %}
         <a href="{% url 'my_area:detail' post_id=post.id %}">投稿詳細に戻る</a>
+        {% else %}
+        <a href="{% url 'my_area:top' %}">投稿一覧に戻る</a>
+        {% endif %}
     </div>
 {% endblock %}
