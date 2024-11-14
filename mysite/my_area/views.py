@@ -28,7 +28,7 @@ def display_edit(request, post_id):
 ###############
 def confirm_delete(request, post_id):
     post = PostService.getById(post_id=post_id)
-    return render(request, 'confirm_delete.html', {
+    return render(request, 'confirm.html', {
         'post': {
             'id': post_id,
             'title': post.title,
@@ -41,7 +41,7 @@ def confirm_delete(request, post_id):
 def confirm_edit(request, post_id):
     post = PostService.getById(post_id)
     form = PostForm(request.POST, instance=post)
-    return render(request, 'confirm_edit.html', {
+    return render(request, 'confirm.html', {
         'post': {
             'id': post_id,
             'title': form.data['title'],
@@ -54,7 +54,7 @@ def confirm_edit(request, post_id):
 
 def confirm_create(request):
     form = PostForm(request.POST, instance=PostForm.newInstance())
-    return render(request, 'confirm_edit.html', {
+    return render(request, 'confirm.html', {
         'post': {
             'id': '',
             'title': form.data['title'],
@@ -75,7 +75,7 @@ def create_post(request):
             PostService.moveImage(request.POST['imgUrl'])
         post = form.save(commit=False)
         post.save()
-        return render(request, 'comp_edit.html', {'post': post, 'mode': 'create'})
+        return render(request, 'complete.html', {'post': post, 'mode': 'create'})
     return render(request, 'edit.html', {'post': post, 'mode': 'create'})
 
 def edit_post(request, post_id):
@@ -86,7 +86,7 @@ def edit_post(request, post_id):
             PostService.moveImage(request.POST['imgUrl'])
         post = form.save(commit=False)
         post.save()
-        return render(request, 'comp_edit.html', {'post': post, 'mode': 'edit'})
+        return render(request, 'complete.html', {'post': post, 'mode': 'edit'})
     return render(request, 'edit.html', {'post': form, 'mode': 'edit'})
 
 def delete_post(request, post_id):
@@ -96,8 +96,8 @@ def delete_post(request, post_id):
         post = form.save(commit=False)
         post.deleteFlag = True
         post.save()
-        return render(request, 'comp_edit.html', {'post': post, 'mode': 'delete'})
-    return render(request, 'confirm_delete.html', {'post': post, 'mode': 'delete'})
+        return render(request, 'complete.html', {'post': post, 'mode': 'delete'})
+    return render(request, 'confirm.html', {'post': post, 'mode': 'delete'})
 
 @csrf_exempt
 def imgupload(request):

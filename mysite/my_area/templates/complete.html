@@ -1,6 +1,9 @@
 {% extends 'common.html' %}
 {% load static %}
 <!DOCTYPE html>
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">
+{% endblock %}
 {% block title %}
     {% if mode == 'delete' %}
     <title>削除完了</title>
@@ -22,8 +25,13 @@
     <h1>編集完了</h1>
     <p>投稿が編集されました。</p>
     {% endif %}
-    <p>{{ mode }}: {{ post.title }}</p>
-    <p>今日の言葉: {{ post.todayWord|linebreaksbr }}</p>
-    <p>画像URL: <img src="{% static '/img/'|add:post.imgUrl %}" alt="Image"></p>
+    <h2>タイトル: {{ post.title }}</h2>
+    <div id="detail-content">
+        <div id="detail-text">{{ post.todayWord|linebreaksbr }}</div>
+        <div id="detail-img">
+            <img src="{% static '/img/'|add:post.imgUrl %}" alt="Image">
+        </div>
+    </div>
+
     <a href="{% url 'my_area:top' %}">投稿一覧に戻る</a>
 {% endblock %}

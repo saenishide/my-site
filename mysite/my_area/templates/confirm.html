@@ -1,6 +1,9 @@
 {% extends 'common.html' %}
 {% load static %}
 <!DOCTYPE html>
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/confirm.css' %}">
+{% endblock %}
 {% block title %}
     {% if mode == 'delete' %}
     <title>削除確認</title>
@@ -18,18 +21,19 @@
     {% else %}
     <h1>編集確認</h1>
     {% endif %}
-    <p>タイトル: {{ post.title }}</p>
-    <p>今日の言葉: {{ post.todayWord|linebreaksbr }}</p>
-    <p>画像URL: 
-        {% if post.imgUrlChange == 'true' %}
-        <img src="{% static '/img/temp/'|add:post.imgUrl %}" alt="Image">
-        {% elif post.imgUrl %}
-        <img src="{% static '/img/'|add:post.imgUrl %}" alt="Image">
-        {% else %}
-        <img src="{% static '/img/noimage_edit.jpg' %}" alt="Image">
-        {% endif %}
-        
-    </p>
+    <h2>タイトル: {{ post.title }}</h2>
+    <div id="detail-content">
+        <div id="detail-text">{{ post.todayWord|linebreaksbr }}</div>
+        <div id="detail-img">
+            {% if post.imgUrlChange == 'true' %}
+            <img src="{% static '/img/temp/'|add:post.imgUrl %}" alt="Image">
+            {% elif post.imgUrl %}
+            <img src="{% static '/img/'|add:post.imgUrl %}" alt="Image">
+            {% else %}
+            <img src="{% static '/img/noimage_edit.jpg' %}" alt="Image">
+            {% endif %}
+        </div>
+    </div>
     {% if mode == 'delete' %}
     <form method="post" action="{% url 'my_area:complete_delete' post_id=post.id %}">
     {% elif mode == 'create' %}
@@ -45,12 +49,14 @@
         {% endif %}
         <input type="hidden" name="imgUrlChange" value="{{ post.imgUrlChange }}">
         <input type="hidden" name="id" value="{{ post.id }}">
-        {% if mode == 'delete' %}
-        <button type="submit">削除する</button>
-        {% elif mode == 'create' %}
-        <button type="submit">作成を確定する</button>
-        {% else %}
-        <button type="submit">編集を確定する</button>
-        {% endif %}
+        <div id="save">
+            {% if mode == 'delete' %}
+            <button id="save-button" type="submit">削除する</button>
+            {% elif mode == 'create' %}
+            <button id="save-button" type="submit">作成を確定する</button>
+            {% else %}
+            <button id="save-button" type="submit">編集を確定する</button>
+            {% endif %}
+        </div>
     </form>
 {% endblock %}
