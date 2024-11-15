@@ -44,16 +44,11 @@
         <div id="save">
             {% if mode == 'edit' %}
             <button id="save-button" type="submit">変更を保存</button>
+            <a id="return-btn" href="{% url 'my_area:detail' post_id=post.id %}">投稿詳細に戻る</a>
             {% else %}
             <button id="save-button" type="submit">投稿を作成</button>
+            <a id="return-btn"  href="{% url 'my_area:top' %}">投稿一覧に戻る</a>
             {% endif %}
         </div>
     </form>
-    <div>
-        {% if mode == 'edit' %}
-        <a href="{% url 'my_area:detail' post_id=post.id %}">投稿詳細に戻る</a>
-        {% else %}
-        <a href="{% url 'my_area:top' %}">投稿一覧に戻る</a>
-        {% endif %}
-    </div>
 {% endblock %}

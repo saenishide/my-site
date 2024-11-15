@@ -14,8 +14,8 @@
         <div id="detail-img"><img src="{% static '/img/'|add:post.imgUrl %}" alt="Image"></div>
     </div>
     <div>
-        <a href="{% url 'my_area:edit' post_id=post.id %}">編集</a>
-        <a href="{% url 'my_area:confirm_delete' post_id=post.id %}">削除</a>
-        <a href="{% url 'my_area:top' %}">投稿一覧に戻る</a>
+        <a id="edit-btn" href="{% url 'my_area:edit' post_id=post.id %}">編集</a>
+        <a id="delete-btn" href="{% url 'my_area:confirm_delete' post_id=post.id %}">削除</a>
+        <a id="return-btn" href="{% url 'my_area:top' %}">投稿一覧に戻る</a>
     </div>
 {% endblock %}
