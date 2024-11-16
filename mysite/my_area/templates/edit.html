@@ -30,11 +30,15 @@
             <div id="detail-img">
                 <label id="img_label" for="id_imgUrl">画像</label>
                 <input id="form-img" type="hidden" name="imgUrl" value="{{post.imgUrl}}">
-                <input id="form-img-change" type="hidden" name="imgUrlChange" value="false">
+                <input id="form-img-change" type="hidden" name="imgUrlChange" value="{{imgUrlChange}}">
                 <input type="file" id="id_imgUrl">
                 <div id="image-display">
                     {% if post.imgUrl %}
-                    <img id="content-img" src="{% static '/img/'|add:post.imgUrl %}" alt="Image">
+                        {% if imgUrlChange == 'true' %}
+                        <img id="content-img" src="{% static '/img/temp/'|add:post.imgUrl %}" alt="Image">
+                        {% else %}
+                        <img id="content-img" src="{% static '/img/'|add:post.imgUrl %}" alt="Image">
+                        {% endif %}
                     {% else %}
                     <img id="content-img" src="{% static '/img/noimage_edit.jpg' %}" alt="Image">
                     {% endif %}

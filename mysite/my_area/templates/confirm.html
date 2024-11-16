@@ -59,4 +59,27 @@
             {% endif %}
         </div>
     </form>
+    {% if mode == 'delete' %}
+    <form method="post" action="{% url 'my_area:detail' post_id=post.id %}">
+    {% elif mode == 'create' %}
+    <form method="post" action="{% url 'my_area:create' %}">
+    {% else %}
+    <form method="post" action="{% url 'my_area:edit' post_id=post.id %}">
+    {% endif %}
+        {% csrf_token %}
+        <input type="hidden" name="title" value="{{ post.title }}">
+        <input type="hidden" name="todayWord" value="{{ post.todayWord }}">
+        {% if post.imgUrl %}
+        <input type="hidden" name="imgUrl" value="{{ post.imgUrl }}">
+        {% endif %}
+        <input type="hidden" name="imgUrlChange" value="{{ post.imgUrlChange }}">
+        <input type="hidden" name="id" value="{{ post.id }}">
+        <div id="return">
+            {% if mode == 'delete' %}
+            <button id="return-btn" type="submit">詳細画面に戻る</button>
+            {% else %}
+            <button id="return-btn" type="submit">入力画面に戻る</button>
+            {% endif %}
+        </div>
+    </form>
 {% endblock %}

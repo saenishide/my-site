@@ -12,16 +12,28 @@ def display_top(request):
     return render(request, 'top.html', {'postList': post_list})
 
 def display_create(request):
-    form = PostForm.newInstance()
-    return render(request, 'edit.html', {'post': form, 'mode': 'create'})
+    imgUrlChange = 'false'
+    if request.method == 'GET':
+        post = PostForm.newInstance()
+    elif request.method == 'POST':
+        form = PostForm(request.POST)
+        post = form.data
+        imgUrlChange = post['imgUrlChange']
+    return render(request, 'edit.html', {'post': post, 'mode': 'create', 'imgUrlChange': imgUrlChange})
 
 def display_detail(request, post_id):
     post = PostService.getById(post_id=post_id)
     return render(request, 'detail.html', {'post': post})
 
 def display_edit(request, post_id):
-    post = PostService.getById(post_id)
-    return render(request, 'edit.html', {'post': post, 'mode': 'edit'})
+    imgUrlChange = 'false'
+    if request.method == 'GET':
+        post = PostService.getById(post_id)
+    elif request.method == 'POST':
+        form = PostForm(request.POST)
+        post = form.data
+        imgUrlChange = post['imgUrlChange']
+    return render(request, 'edit.html', {'post': post, 'mode': 'edit', 'imgUrlChange': imgUrlChange})
 
 ###############
 # 確認
