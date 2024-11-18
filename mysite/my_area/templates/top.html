@@ -12,16 +12,16 @@
 <p>ようこそ、トップページへ！</p>
 <div class="post_list">
     {% for post in postList %}
-    <div class="post_cassette">
+    <a href="{% url 'my_area:detail' post_id=post.id %}" class="post_cassette">
         <div class="date_title">
             <span>{{ post.date|date:"Y/m/d" }}</span>
-            <span class="post_title">タイトル「{{ post.title }}」</span>
+            <span class="post_title">「{{ post.title }}」</span>
         </div>
         <div class="context_detail">
-            <span>{{ post.todayWord|linebreaksbr }}</span>
-            <a href="{% url 'my_area:detail' post_id=post.id %}">詳細</a>
+            <span class="context_text">{{ post.todayWord }}</span>
+            <img class="context_img" src="{% static '/img/'|add:post.imgUrl %}" alt="Image">
         </div>
-    </div>
+    </a>
     {% endfor %}
 </div>
 <a href="{% url 'my_area:create' %}">新しい投稿を作成</a>

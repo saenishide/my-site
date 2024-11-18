@@ -9,11 +9,21 @@
 
 .post_list .post_cassette {
     position: relative;
+    display: inline-block;
     margin: 5px;
     padding: 5px;
     border: 1px solid #000;
     background-color: #8AE043;
     border-radius: 10px;
+    height: 200px;
+    width: 300px;
+    text-decoration: none;
+    color: #000;
+}
+
+.post_list .post_cassette:hover {
+    background-color: #bedba7;
+
 }
 
 .post_list .post_cassette .date_title {
@@ -30,6 +40,26 @@
 }
 
 .post_list .post_cassette .context_detail {
+    position: relative;
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+.post_list .post_cassette .context_detail .context_text {
+    position:absolute;
+    width: 100%;
+    white-space: nowrap; /* 横幅のMAXに達しても改行しない */
+    overflow: hidden; /* 溢れた部分を隠す */
+    text-overflow: ellipsis; /* 「…」と省略 */
+    -webkit-text-overflow: ellipsis; /* Safari用 */
+    -o-text-overflow: ellipsis; /* Opera用 */
+}
+
+
+.post_list .post_cassette .context_detail .context_img {
+    margin-top: 30px;
+    position: absolute;
+    width: 100%;
+    height: 130px;       /* 高さも設定したげる */
+    object-fit: contain; /* 画像のアスペクト比を保持したまま、指定したサイズに収まるように表示 */
 }

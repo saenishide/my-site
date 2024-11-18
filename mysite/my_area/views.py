@@ -99,7 +99,7 @@ def edit_post(request, post_id):
         post = form.save(commit=False)
         post.save()
         return render(request, 'complete.html', {'post': post, 'mode': 'edit'})
-    return render(request, 'edit.html', {'post': form, 'mode': 'edit'})
+    return render(request, 'edit.html', {'post': form.data, 'mode': 'edit'})
 
 def delete_post(request, post_id):
     post = PostService.getById(post_id)
