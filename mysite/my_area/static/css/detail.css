@@ -20,8 +20,8 @@
     display: inline-block;
     border: 1px solid #000;
     border-radius: 5px;
-    padding: 10px 20px;
-    width: 30%;
+    padding: 10px 50px;
+    width: 50%;
     margin-top: 10px;
     background-color: #007bff;
     color: #fff;
@@ -41,7 +41,7 @@
     border: 1px solid #000;
     border-radius: 5px;
     padding: 10px 20px;
-    width: 30%;
+    width: 40%;
     margin-top: 10px;
     background-color: #f74600;
     color: #fff;
@@ -57,14 +57,14 @@
 }
 
 #return-btn {
-    display: inline-block;
+    display: block;
     border: 1px solid #000;
     border-radius: 5px;
     padding: 10px 20px;
-    width: 30%;
+    width: 20%;
     margin-top: 10px;
+    color: #000000;
     background-color: #00ff2a;
-    color: #fff;
     text-align: center;
     text-decoration: none;
     font-size: 20px;

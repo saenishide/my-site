@@ -15,6 +15,29 @@
 {% endblock %}
 {% block content %}
     {% if mode == 'delete' %}
+    <form method="post" action="{% url 'my_area:detail' post_id=post.id %}">
+    {% elif mode == 'create' %}
+    <form method="post" action="{% url 'my_area:create' %}">
+    {% else %}
+    <form method="post" action="{% url 'my_area:edit' post_id=post.id %}">
+    {% endif %}
+        {% csrf_token %}
+        <input type="hidden" name="title" value="{{ post.title }}">
+        <input type="hidden" name="todayWord" value="{{ post.todayWord }}">
+        {% if post.imgUrl %}
+        <input type="hidden" name="imgUrl" value="{{ post.imgUrl }}">
+        {% endif %}
+        <input type="hidden" name="imgUrlChange" value="{{ post.imgUrlChange }}">
+        <input type="hidden" name="id" value="{{ post.id }}">
+        <div id="return">
+            {% if mode == 'delete' %}
+            <button id="return-btn" type="submit">詳細画面に戻る</button>
+            {% else %}
+            <button id="return-btn" type="submit">入力画面に戻る</button>
+            {% endif %}
+        </div>
+    </form>
+    {% if mode == 'delete' %}
     <h1>削除確認</h1>
     {% elif mode == 'create' %}
     <h1>作成確認</h1>
@@ -56,29 +79,6 @@
             <button id="save-button" type="submit">作成を確定する</button>
             {% else %}
             <button id="save-button" type="submit">編集を確定する</button>
-            {% endif %}
-        </div>
-    </form>
-    {% if mode == 'delete' %}
-    <form method="post" action="{% url 'my_area:detail' post_id=post.id %}">
-    {% elif mode == 'create' %}
-    <form method="post" action="{% url 'my_area:create' %}">
-    {% else %}
-    <form method="post" action="{% url 'my_area:edit' post_id=post.id %}">
-    {% endif %}
-        {% csrf_token %}
-        <input type="hidden" name="title" value="{{ post.title }}">
-        <input type="hidden" name="todayWord" value="{{ post.todayWord }}">
-        {% if post.imgUrl %}
-        <input type="hidden" name="imgUrl" value="{{ post.imgUrl }}">
-        {% endif %}
-        <input type="hidden" name="imgUrlChange" value="{{ post.imgUrlChange }}">
-        <input type="hidden" name="id" value="{{ post.id }}">
-        <div id="return">
-            {% if mode == 'delete' %}
-            <button id="return-btn" type="submit">詳細画面に戻る</button>
-            {% else %}
-            <button id="return-btn" type="submit">入力画面に戻る</button>
             {% endif %}
         </div>
     </form>
