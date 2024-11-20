@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "sample.apps.SampleConfig",  # プロジェクトへの登録
     "my_area.apps.MyAreaConfig",  # プロジェクトへの登録
+    "game_area.apps.GameAreaConfig",  # プロジェクトへの登録
 ]
 
 MIDDLEWARE = [
