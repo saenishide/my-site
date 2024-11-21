@@ -123,6 +123,7 @@ STATIC_URL = "static/"
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "my_area", "static"), 
+    os.path.join(BASE_DIR, "game_area", "static"), 
 ]
 
 MEDIA_URL = 'media/'
