@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,6 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "sample.apps.SampleConfig",  # プロジェクトへの登録
+    "my_area.apps.MyAreaConfig",  # プロジェクトへの登録
+    "game_area.apps.GameAreaConfig",  # プロジェクトへの登録
 ]
 
 MIDDLEWARE = [
@@ -117,6 +120,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "static/"
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "my_area", "static"), 
+    os.path.join(BASE_DIR, "game_area", "static"), 
+]
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "my_area", "media", "img")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

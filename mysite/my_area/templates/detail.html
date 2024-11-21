@@ -1,0 +1,21 @@
+{% extends 'common.html' %}
+{% load static %}
+<!DOCTYPE html>
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">
+{% endblock %}
+{% block title %}
+<title>投稿詳細</title>
+{% endblock %}
+{% block content %}
+    <a id="return-btn" href="{% url 'my_area:top' %}">←投稿一覧に戻る</a>
+    <h1>タイトル: {{ post.title }}</h1>
+    <div id="detail-content">
+        <div id="detail-text">{{ post.todayWord|linebreaksbr }}</div>
+        <div id="detail-img"><img src="{% static '/img/'|add:post.imgUrl %}" alt="Image"></div>
+    </div>
+    <div>
+        <a id="edit-btn" href="{% url 'my_area:edit' post_id=post.id %}">編集</a>
+        <a id="delete-btn" href="{% url 'my_area:confirm_delete' post_id=post.id %}">削除</a>
+    </div>
+{% endblock %}

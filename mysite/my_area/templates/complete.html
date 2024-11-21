@@ -1,0 +1,36 @@
+{% extends 'common.html' %}
+{% load static %}
+<!DOCTYPE html>
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">
+{% endblock %}
+{% block title %}
+    {% if mode == 'delete' %}
+    <title>削除完了</title>
+    {% elif mode == 'create' %}
+    <title>作成完了</title>
+    {% else %}
+    <title>編集完了</title>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<a id="return-btn" href="{% url 'my_area:top' %}">投稿一覧に戻る</a>
+    {% if mode == 'delete' %}
+    <h1>削除完了</h1>
+    <p>投稿が削除されました。</p>
+    {% elif mode == 'create' %}
+    <h1>作成完了</h1>
+    <p>新しい投稿が作成されました。</p>
+    {% else %}
+    <h1>編集完了</h1>
+    <p>投稿が編集されました。</p>
+    {% endif %}
+    <h2>タイトル: {{ post.title }}</h2>
+    <div id="detail-content">
+        <div id="detail-text">{{ post.todayWord|linebreaksbr }}</div>
+        <div id="detail-img">
+            <img src="{% static '/img/'|add:post.imgUrl %}" alt="Image">
+        </div>
+    </div>
+{% endblock %}

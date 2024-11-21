@@ -1,0 +1,120 @@
+#detail-content {
+    width: 100%;
+}
+
+#title_area {
+    position: relative;
+    width: 100%;
+}
+
+#title_area #title_label {
+    display: inline-block;
+    position: relative;
+    width: 20%;
+}
+
+#title_area #title_text {
+    position: relative;
+    width: 100%;
+    height: 1.8em;
+    border: 0px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.4em;
+}
+
+#text_area {
+    position: relative;
+    margin-top: 1.5em;
+    float: left;
+    width: 70%;
+}
+
+#text_area #text_label {
+    display: inline-block;
+    position: relative;
+    width: 20%;
+}
+
+#text_area #text_text {
+    position: relative;
+    width: 96%;
+    height: 300px;
+    border: 0px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.2em;
+}
+
+#detail-img {
+    position: relative;
+    float: left;
+    width: 30%;
+    height: 300px;
+    margin-top: 1.5em;
+}
+
+#detail-img:hover {
+    cursor: pointer;
+}
+
+#detail-img:hover #content-img {
+    opacity: 0.5;
+}
+
+#detail-img #img_label {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+
+#detail-img > img {
+    width: 100%;
+}
+
+#image-display, #image-display > img {
+    width: 100%;
+    height: 300px;       /* 高さも設定したげる */
+    object-fit: contain; /* 画像のアスペクト比を保持したまま、指定したサイズに収まるように表示 */
+}
+
+#id_imgUrl {
+    display: none;
+}
+
+#save {	
+    clear: left; /* float: leftをおわらせるために必要 */
+}
+
+#save #save-button {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 3em;
+    font-size: 1.2em;
+    border: 0px solid #ccc;
+    border-radius: 5px;
+    background-color: #00ffdd;
+    color: #000;
+    cursor: pointer;
+    padding: 10px 20px;
+}
+
+#return-btn {
+    display: inline-block;
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 10px 20px;
+    width: 20%;
+    margin-top: 10px;
+    background-color: #00ff2a;
+    color: #000;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#return-btn:hover {
+    background-color: #005300;
+}

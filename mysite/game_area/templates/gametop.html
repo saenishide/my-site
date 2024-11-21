@@ -1,0 +1,22 @@
+{% extends 'common.html' %}
+{% load static %}
+<!DOCTYPE html>
+{% block title %}
+    <title>トップページ</title>
+{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'js/gametop.js' %}"></script>
+{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/gametop.css' %}">
+{% endblock %}
+{% block content %}
+<h1>ここからはゲームエリアだ</h1>
+<p>ようこそ、トップページへ！</p>
+<div id="select_zero_or_one">
+    <p>コンピューターと意思疎通!さあ、0か1か?!</p>
+    <button id="zero">0</button>
+    <button id="one">1</button>
+    <p id="result"></p>
+</div>
+{% endblock %}

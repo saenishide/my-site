@@ -1,0 +1,77 @@
+#detail-content {
+    width: 100%;
+}
+
+#detail-text {
+    float: left;
+    width: 70%;
+}
+
+#detail-img {
+    float: left;
+    width: 30%;
+}
+
+#detail-img > img {
+    width: 100%;
+}
+
+#edit-btn {
+    display: inline-block;
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 10px 50px;
+    width: 50%;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#edit-btn:hover {
+    background-color: #0056b3;
+}
+
+#delete-btn {
+    display: inline-block;
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 10px 20px;
+    width: 40%;
+    margin-top: 10px;
+    background-color: #f74600;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#delete-btn:hover {
+    background-color: #6e0000;
+}
+
+#return-btn {
+    display: block;
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 10px 20px;
+    width: 20%;
+    margin-top: 10px;
+    color: #000000;
+    background-color: #00ff2a;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#return-btn:hover {
+    background-color: #005300;
+}

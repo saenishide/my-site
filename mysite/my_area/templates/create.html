@@ -1,0 +1,14 @@
+{% extends 'common.html' %}
+<!DOCTYPE html>
+{% block title %}
+<title>新規投稿作成</title>
+{% endblock %}
+{% block content %}
+    <h1>新規投稿作成</h1>
+    <form method="post" action="{% url 'my_area:confirm_create' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">投稿を作成</button>
+    </form>
+    <a href="{% url 'my_area:top' %}">投稿一覧に戻る</a>
+{% endblock %}
