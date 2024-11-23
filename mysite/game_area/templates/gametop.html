@@ -2,21 +2,26 @@
 {% load static %}
 <!DOCTYPE html>
 {% block title %}
-    <title>トップページ</title>
+<title>トップページ</title>
 {% endblock %}
 {% block extra_js %}
-    <script src="{% static 'js/gametop.js' %}"></script>
+<script src="{% static 'js/gametop.js' %}"></script>
 {% endblock %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/gametop.css' %}">
+<link rel="stylesheet" href="{% static 'css/gametop.css' %}">
 {% endblock %}
 {% block content %}
 <h1>ここからはゲームエリアだ</h1>
 <p>ようこそ、トップページへ！</p>
-<div id="select_zero_or_one">
+<div id="select_zero_or_one" class="game-contents">
     <p>コンピューターと意思疎通!さあ、0か1か?!</p>
-    <button id="zero">0</button>
-    <button id="one">1</button>
+    <div id="btn-area">
+        <button id="zero" class="btn">0</button>
+        <button id="one" class="btn">1</button>
+    </div>
+    <div id="comment"></div>
     <p id="result"></p>
 </div>
+<!-- <div class="game-contents">
+</div> -->
 {% endblock %}

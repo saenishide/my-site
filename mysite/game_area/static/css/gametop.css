@@ -1,0 +1,73 @@
+.game-contents {
+    display: inline-block;
+    vertical-align: top;
+    width: 45%;
+    padding: 1%;
+    margin-left: 5px;
+    height: 300px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+#select_zero_or_one {
+    background-color: aquamarine;
+    position: relative;
+}
+
+#select_zero_or_one #btn-area {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+#select_zero_or_one #btn-area .btn {
+    display: inline-block;
+    width: 30%;
+    height: 30%;
+    margin: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+#select_zero_or_one #btn-area .btn#zero {
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+#select_zero_or_one #btn-area .btn#one {
+    background-color: #000;
+    color: #f0f0f0;
+}
+
+#select_zero_or_one #btn-area .btn:hover {
+    opacity: 0.7;
+}
+
+#select_zero_or_one #result {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    bottom: 5%;
+    font-size: 50px;
+}
+
+#select_zero_or_one #comment {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 3px;
+    padding: 0 50px;
+    font-size: 40px;
+    font-weight: bold;
+    color: red;
+    border: 5px solid red;
+    border-radius: 5px;
+}
+
+
+#select_zero_or_one #comment:empty {
+    display: none;
+}
