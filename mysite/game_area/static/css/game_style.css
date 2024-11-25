@@ -1,20 +1,20 @@
 body {
-    background-color: #96ac84;
+    background-color: #dbcb71;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
 #content_header {
-    background-color: #8AE043;
+    position: relative;
+    background-color: #e98d37;
     border-bottom: 1px solid #000;
     height: 150px;
     width: 100%;
     padding: 0;
-    position: relative;
 }
 
-#menu_gamearea_top {
+#menu_myarea_top {
     position: absolute;
     text-decoration: none;
     border: #000 1px solid;
@@ -28,6 +28,7 @@ body {
     left: 111px;
     width: 200px;
     text-align: center;
+    disabled: true;
 }
 
 #content_body {

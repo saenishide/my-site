@@ -1,18 +1,22 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
+
 <head>
     {% block title %}{% endblock %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/game_style.css' %}">
     {% block extra_css %}{% endblock %}
     {% block extra_js %}{% endblock %}
 </head>
+
 <body>
     <div id="content_header">
+        <a id="menu_myarea_top" href="{% url 'my_area:top' %}">トップ</a>
     </div>
     <div id="content_body">
         {% block content %}
         {% endblock %}
     </div>
 </body>
+
 </html>
