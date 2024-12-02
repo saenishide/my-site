@@ -67,6 +67,7 @@ function getCookie(data) {
 
 let canvas; //絵を描くエリア
 let clearButton; //消すボタン
+let saveButton; //保存ボタン
 
 //キャンバスの設定
 function setup() {
@@ -74,8 +75,13 @@ function setup() {
     canvas.parent('canvas'); //CanvasをHTMLのcanvas要素に追加
     background(255); //Canvasの背景を白にする
     clearButton = createButton('消す');//ボタンを作成
-    clearButton.parent('canvas');//ボタンをHTMLのcanvas要素に追加
+    clearButton.parent('sketch-number');//ボタンをHTMLのcanvas要素に追加
+    clearButton.style('position', 'absolute');//ボタンのスタイルを変更
+    clearButton.style('padding', '10px');//ボタンのスタイルを変更
     clearButton.mousePressed(clearCanvas);//ボタンクリックの関数を指定
+    saveButton = createButton('保存');//ボタンを作成
+    saveButton.parent('canvas');//ボタンをHTMLのcanvas要素に追加
+    saveButton.mousePressed(savedCanvas);//ボタンクリックの関数を指定
 }
 
 //マウスで絵を描くための関数
@@ -89,4 +95,24 @@ function draw() {
 //絵を全て消すボタンの動作
 function clearCanvas() {
     background(255);
+}
+
+function savedCanvas() {
+    // 画像として取り込む
+    let img = canvas.elt.toDataURL('image/png');
+    const sketchAreaChildren = document.getElementById('sketch-number').children;
+    let resultArea;
+    for (let i = 0; i < sketchAreaChildren.length; i++) {
+        if (sketchAreaChildren[i].id === 'result') {
+            resultArea = sketchAreaChildren[i];
+            break;
+        }
+    }
+    if (!resultArea) {
+        return;
+    }
+    const imgElement = document.createElement('img');
+    imgElement.src = img;
+    resultArea.appendChild(imgElement);
+
 }

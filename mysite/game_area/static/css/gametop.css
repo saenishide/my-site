@@ -71,3 +71,15 @@
 #select_zero_or_one #comment:empty {
     display: none;
 }
+
+#sketch-number {
+    position: relative;
+}
+
+#sketch-number #sketch-area {
+    display: inline-block;
+}
+
+#sketch-number #result {
+    display: inline-block;
+}
