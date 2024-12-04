@@ -76,10 +76,24 @@
     position: relative;
 }
 
+#sketch-number .sketch-head {
+    top: 0;
+    left: 0;
+    width: 100%;
+    font-size: 1.5em;
+    font-size: 30px;
+}
+
 #sketch-number #sketch-area {
     display: inline-block;
 }
 
 #sketch-number #result {
     display: inline-block;
+}
+
+#sketch-number #result-text {
+    display: inline-block;
+    font-size: 30px;
+    text-align: center;
 }

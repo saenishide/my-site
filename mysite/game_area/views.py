@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from game_area.service.machineLearningService import MachineLearningService
 import random
 
 # Create your views here.
@@ -20,5 +21,14 @@ def select_zero_or_one(request):
             result = -1
     
     return JsonResponse({"result": result})
+
+@csrf_exempt
+def check_number(request):
+    if request.method == 'POST':
+        number_img = request.POST['img']
+        result = MachineLearningService.check_number(number_img)
+
+        return JsonResponse({"result": result})
+
     
     

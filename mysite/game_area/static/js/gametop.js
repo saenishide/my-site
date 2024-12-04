@@ -75,13 +75,18 @@ function setup() {
     canvas.parent('canvas'); //CanvasをHTMLのcanvas要素に追加
     background(255); //Canvasの背景を白にする
     clearButton = createButton('消す');//ボタンを作成
-    clearButton.parent('sketch-number');//ボタンをHTMLのcanvas要素に追加
-    clearButton.style('position', 'absolute');//ボタンのスタイルを変更
+    clearButton.parent('button-area');//ボタンをHTMLのcanvas要素に追加
     clearButton.style('padding', '10px');//ボタンのスタイルを変更
+    clearButton.style('left', '10px');//ボタンのスタイルを変更
     clearButton.mousePressed(clearCanvas);//ボタンクリックの関数を指定
     saveButton = createButton('保存');//ボタンを作成
-    saveButton.parent('canvas');//ボタンをHTMLのcanvas要素に追加
+    saveButton.parent('button-area');//ボタンをHTMLのcanvas要素に追加
+    saveButton.style('padding', '10px');//ボタンのスタイルを変更
     saveButton.mousePressed(savedCanvas);//ボタンクリックの関数を指定
+    checkButton = createButton('判定');//ボタンを作成
+    checkButton.parent('button-area');//ボタンをHTMLのcanvas要素に追加
+    checkButton.style('padding', '10px');//ボタンのスタイルを変更
+    checkButton.mousePressed(checkNumber);//ボタンクリックの関数を指定
 }
 
 //マウスで絵を描くための関数
@@ -100,19 +105,28 @@ function clearCanvas() {
 function savedCanvas() {
     // 画像として取り込む
     let img = canvas.elt.toDataURL('image/png');
-    const sketchAreaChildren = document.getElementById('sketch-number').children;
-    let resultArea;
-    for (let i = 0; i < sketchAreaChildren.length; i++) {
-        if (sketchAreaChildren[i].id === 'result') {
-            resultArea = sketchAreaChildren[i];
-            break;
-        }
-    }
-    if (!resultArea) {
-        return;
-    }
-    const imgElement = document.createElement('img');
+    const imgElement = document.getElementById('result-img');
     imgElement.src = img;
-    resultArea.appendChild(imgElement);
+}
 
+function checkNumber() {
+    const formData = new FormData();
+    const img = document.getElementById('result-img');
+    formData.append('img', img);
+    fetch('/game_area/check_number/', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken') // CSRFトークンを含める
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            const result = data['result'];
+            const resultArea = document.getElementById('result-text');
+            resultArea.innerHTML = `判定結果: ${result}`;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 }
