@@ -79,14 +79,10 @@ function setup() {
     clearButton.style('padding', '10px');//ボタンのスタイルを変更
     clearButton.style('left', '10px');//ボタンのスタイルを変更
     clearButton.mousePressed(clearCanvas);//ボタンクリックの関数を指定
-    saveButton = createButton('保存');//ボタンを作成
+    saveButton = createButton('判定');//ボタンを作成
     saveButton.parent('button-area');//ボタンをHTMLのcanvas要素に追加
     saveButton.style('padding', '10px');//ボタンのスタイルを変更
     saveButton.mousePressed(savedCanvas);//ボタンクリックの関数を指定
-    checkButton = createButton('判定');//ボタンを作成
-    checkButton.parent('button-area');//ボタンをHTMLのcanvas要素に追加
-    checkButton.style('padding', '10px');//ボタンのスタイルを変更
-    checkButton.mousePressed(checkNumber);//ボタンクリックの関数を指定
 }
 
 //マウスで絵を描くための関数
@@ -105,14 +101,12 @@ function clearCanvas() {
 function savedCanvas() {
     // 画像として取り込む
     let img = canvas.elt.toDataURL('image/png');
-    const imgElement = document.getElementById('result-img');
-    imgElement.src = img;
+    canvas.elt.toBlob((b) => { checkNumber(b); }, 'image/jpeg', 1.0);
 }
 
-function checkNumber() {
+function checkNumber(b) {
     const formData = new FormData();
-    const img = document.getElementById('result-img');
-    formData.append('img', img);
+    formData.append('image', b);
     fetch('/game_area/check_number/', {
         method: 'POST',
         body: formData,
