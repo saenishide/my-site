@@ -133,3 +133,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "my_area", "media", "img")
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+DEBUG = True

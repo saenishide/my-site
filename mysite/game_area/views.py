@@ -3,7 +3,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import random
 from django.conf import settings
-from game_area.apps import GameAreaConfig 
+from game_area.apps import GameAreaConfig
+import re
 
 # Create your views here.
 def display_top(request):
@@ -35,5 +36,22 @@ def check_number(request):
 
         return JsonResponse({"result": result})
 
-    
-    
+@csrf_exempt
+def sort_get_list(request):
+    num = request.POST.get('number')
+    data = [25,3,49,67,14,5,9,10,2,1]
+    data.sort(reverse=True)
+    return JsonResponse({"result": data[:int(num)]})
+
+@csrf_exempt
+def check_string(request):
+    if request.method == 'POST':
+        str_data = request.POST.get('text')
+
+        # 郵便番号の正規表現
+        ptn = re.compile(r'^(\d{3})-(\d{4})$')
+        # 郵便番号を抽出
+        if result := ptn.search(str_data):
+            return JsonResponse({"result": "郵便番号上3桁は" + result.group(1) + "、下4桁は" + result.group(2) + "です。"})
+        else:
+            return JsonResponse({"result": "郵便番号の形式ではありませんよほほほ。"})

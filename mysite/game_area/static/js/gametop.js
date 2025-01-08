@@ -12,6 +12,16 @@ document.addEventListener('DOMContentLoaded', function () {
             correctPoint = result;
         });
     });
+
+    const executeButton = document.getElementById('execute');
+    executeButton.addEventListener('click', function () {
+        const formData = new FormData();
+        formData.append('number', 5);
+        getlistExecute(formData).then((result) => {
+            const resultArea = document.getElementById('result-list');
+            resultArea.innerHTML = '判定結果: ' + result;
+        });
+    });
 });
 
 async function settingCorrectPoint(selectNum, nowPoint) {
@@ -47,6 +57,27 @@ async function checkSelect(num) {
         .then(response => response.json())
         .then(data => {
             result = data['result'] === 1;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    return new Promise((resolve) => {
+        resolve(result);
+    });
+}
+
+async function getlistExecute(formData) {
+    let result = [];
+    await fetch('/game_area/sort_get_list/', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken') // CSRFトークンを含める
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            result = data['result'];
         })
         .catch((error) => {
             console.error('Error:', error);
