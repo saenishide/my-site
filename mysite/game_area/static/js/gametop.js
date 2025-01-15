@@ -15,13 +15,36 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const executeButton = document.getElementById('execute');
     executeButton.addEventListener('click', function () {
+        const listSize = document.getElementById('list-size').value;
         const formData = new FormData();
-        formData.append('number', 5);
+        formData.append('number', listSize);
         getlistExecute(formData).then((result) => {
             const resultArea = document.getElementById('result-list');
             resultArea.innerHTML = '判定結果: ' + result;
         });
     });
+
+    const chkStrExecuteButton = document.getElementById('checkstr-execute');
+    chkStrExecuteButton.addEventListener('click', function () {
+        const targetStr = document.getElementById('check-string').value;
+        document.getElementById('input-check-string').innerHTML = targetStr;
+        const formData = new FormData();
+        formData.append('text', targetStr);
+        getCheckStringResult(formData).then((result) => {
+            const resultArea = document.getElementById('check-string-result');
+            resultArea.innerHTML = '抽出結果: ' + result;
+        });
+    });
+
+    const chkWordExecuteButton = document.getElementById('love-word-execute');
+    chkWordExecuteButton.addEventListener('click', function () {
+        const targetStr = document.getElementById('love-word').value;
+        const resultArea = document.getElementById('love-word-result');
+        const formData = new FormData();
+        formData.append('word', targetStr);
+        resultArea.innerHTML = getCheckWordResult(formData);
+    });
+
 });
 
 async function settingCorrectPoint(selectNum, nowPoint) {
@@ -69,6 +92,54 @@ async function checkSelect(num) {
 async function getlistExecute(formData) {
     let result = [];
     await fetch('/game_area/sort_get_list/', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken') // CSRFトークンを含める
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            result = data['result'];
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    return new Promise((resolve) => {
+        resolve(result);
+    });
+}
+
+async function getCheckStringResult(formData) {
+    let result = '';
+    await fetch('/game_area/check_string/', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken') // CSRFトークンを含める
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            result = data['result'];
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    return new Promise((resolve) => {
+        resolve(result);
+    });
+}
+
+function getCheckWordResult(formData) {
+    return commonFetch('/game_area/check_suki/', formData).then((data) => {
+        return data;
+    });
+}
+
+async function commonFetch(url, formData) {
+    let result = '';
+    await fetch(url, {
         method: 'POST',
         body: formData,
         headers: {

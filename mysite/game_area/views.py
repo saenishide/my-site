@@ -49,9 +49,22 @@ def check_string(request):
         str_data = request.POST.get('text')
 
         # 郵便番号の正規表現
-        ptn = re.compile(r'^(\d{3})-(\d{4})$')
+        ptn = re.compile(r'(\d{3})-(\d{4})')
         # 郵便番号を抽出
         if result := ptn.search(str_data):
             return JsonResponse({"result": "郵便番号上3桁は" + result.group(1) + "、下4桁は" + result.group(2) + "です。"})
         else:
             return JsonResponse({"result": "郵便番号の形式ではありませんよほほほ。"})
+
+@csrf_exempt
+def check_suki(request):
+    if request.method == 'POST':
+        str_data = request.POST.get('word')
+
+        # 郵便番号の正規表現
+        ptn = re.compile(r'好き')
+        # 郵便番号を抽出
+        if ptn.search(str_data):
+            return JsonResponse({"result": "好きですね"})
+        else:
+            return JsonResponse({"result": "好きじゃないですね"})
